@@ -1,5 +1,7 @@
+import { useState } from "react";
+
 const Main = () => {
-  const ingredients = ["Chicken", "Oregano", "Tomatoes"];
+  const [ingredients, setIngredients] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -7,7 +9,9 @@ const Main = () => {
     const formData = new FormData(e.currentTarget);
     const newIngredient = formData.get("ingredient");
 
-    console.log(newIngredient);
+    setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
+
+    e.currentTarget.reset();
   };
 
   return (
@@ -18,8 +22,8 @@ const Main = () => {
       <form onSubmit={handleSubmit} className="flex gap-4">
         <input
           type="text"
-          placeholder="e.g. oregano"
           name="ingredient"
+          placeholder="e.g. oregano"
           aria-label="Add ingredient"
           className="py-2 px-5 rounded-lg bg-llama-white text-llama-gray"
         />

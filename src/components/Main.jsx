@@ -1,7 +1,10 @@
 import { useState } from "react";
+import IngredientsList from "./IngredientsList";
+import LlamaRecipe from "./LlamaRecipe";
 
 const Main = () => {
   const [ingredients, setIngredients] = useState([]);
+  const [recipeShown, setRecipeShown] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,11 +17,13 @@ const Main = () => {
     e.currentTarget.reset();
   };
 
+  const toggleRecipeShown = () => {
+    setRecipeShown(true);
+  };
+
   return (
-    <main
-      className="flex flex-col items-center w-screen h-screen py-14
-    bg-llama-gray text-llama-creme"
-    >
+    <main className="flex flex-col items-center w-screen h-screen py-14 text-llama-creme">
+      {/* Form to add ingredients */}
       <form onSubmit={handleSubmit} className="flex gap-4">
         <input
           type="text"
@@ -36,11 +41,16 @@ const Main = () => {
         </button>
       </form>
 
-      <ul>
-        {ingredients.map((ingredient, index) => {
-          return <li key={index}>{ingredient}</li>;
-        })}
-      </ul>
+      {/* Ingredients list section */}
+      {ingredients.length > 0 && (
+        <IngredientsList
+          ingredients={ingredients}
+          toggleRecipeShown={toggleRecipeShown}
+        />
+      )}
+
+      {/* Recipe section */}
+      {recipeShown && <LlamaRecipe />}
     </main>
   );
 };

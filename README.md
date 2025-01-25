@@ -7,6 +7,7 @@ This a small fun using Huggingface Inference. Mistral AI\* is providing the user
 ### Installation
 
 `git clone https://github.com/redbillis/chef-llama.git`
+
 `npm install`
 
 Make sure to add your Access Token from hugginface to your .env file. Also please check ai.js for the name.

@@ -4,13 +4,7 @@ import LlamaRecipe from "./LlamaRecipe";
 import { getRecipeFromMistral } from "../ai";
 
 const Main = () => {
-  const [ingredients, setIngredients] = useState([
-    "eggplant",
-    "oregano",
-    "cheddar cheese",
-    "chicken breast",
-    "olive oil",
-  ]);
+  const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState("");
 
   const handleSubmit = (e) => {

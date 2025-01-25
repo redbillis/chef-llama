@@ -1,4 +1,4 @@
-const IngredientsList = ({ ingredients, toggleRecipeShown }) => {
+const IngredientsList = ({ ingredients, getRecipe }) => {
   return (
     <section className="flex flex-col gap-4">
       <h2 className="text-3xl font-bold mt-8">Ingredients on hand:</h2>
@@ -21,7 +21,7 @@ const IngredientsList = ({ ingredients, toggleRecipeShown }) => {
               className="py-2  px-5 bg-llama-orange text-llama-white
           p-2 rounded-lg drop-shadow-md hover:bg-llama-black/60 
           delay-75 transition ease-in-out duration-300"
-              onClick={toggleRecipeShown}
+              onClick={getRecipe}
             >
               Get a recipe
             </button>

@@ -1,10 +1,17 @@
 import { useState } from "react";
 import IngredientsList from "./IngredientsList";
 import LlamaRecipe from "./LlamaRecipe";
+import { getRecipeFromMistral } from "../ai";
 
 const Main = () => {
-  const [ingredients, setIngredients] = useState([]);
-  const [recipeShown, setRecipeShown] = useState(false);
+  const [ingredients, setIngredients] = useState([
+    "eggplant",
+    "oregano",
+    "cheddar cheese",
+    "chicken breast",
+    "olive oil",
+  ]);
+  const [recipe, setRecipe] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,9 +24,10 @@ const Main = () => {
     e.currentTarget.reset();
   };
 
-  const toggleRecipeShown = () => {
-    setRecipeShown(true);
-  };
+  async function getRecipe() {
+    const recipeMarkdown = await getRecipeFromMistral(ingredients);
+    setRecipe(recipeMarkdown);
+  }
 
   return (
     <main className="flex flex-col items-center w-screen h-screen py-14 text-llama-creme">
@@ -43,14 +51,11 @@ const Main = () => {
 
       {/* Ingredients list section */}
       {ingredients.length > 0 && (
-        <IngredientsList
-          ingredients={ingredients}
-          toggleRecipeShown={toggleRecipeShown}
-        />
+        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
       )}
 
       {/* Recipe section */}
-      {recipeShown && <LlamaRecipe />}
+      {recipe && <LlamaRecipe recipe={recipe} />}
     </main>
   );
 };
